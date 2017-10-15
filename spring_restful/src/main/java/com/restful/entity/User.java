@@ -22,7 +22,14 @@ public class User implements Serializable {
     @Column
     private int age;
 
-
+    public User () {
+    }
+    
+    public User (long id, int age, String name) {
+    	this.id = id;
+		this.age = age;
+		this.name = name;
+    }
 
     public long getId() {
         return id;

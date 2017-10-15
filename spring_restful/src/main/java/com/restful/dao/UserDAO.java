@@ -18,64 +18,28 @@ import java.util.List;
   */
 
  @Repository
- public class UserDAO implements DaoBasic{
+ public class UserDAO{
 
      @Autowired
      private SessionFactory sessionFactory;
 
      @Transactional
      public List<User> getAllUsers() {
-             Session ses = sessionFactory.openSession();
-             Query query = ses.createQuery(" from "+User.class.getName()+"");
-             return query.list();
+         Session ses = sessionFactory.openSession();
+         Query query = ses.createQuery(" from "+User.class.getName()+"");
+         return query.list();
      }
-
-	@Override
-	public <T> List<T> find_multi(List<T> any) {
-		Session ses = sessionFactory.openSession();
-        Query query = ses.createQuery(" from "+User.class.getName()+"");
-        return query.list();
-	}
-
-	@Override
-	public <T> T find_single(T any) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T> List<T> create_multi(List<T> any) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T> T create_single(T any) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T> List<T> delete_multi(List<T> any) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T> T delete_single(T any) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T> List<T> update_multi(List<T> any) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T> T update_single(T any) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+     @Transactional
+     public User getUser(long id) {
+    	 Session ses = sessionFactory.openSession();
+    	 String hql = " from " +User.class.getName()+ " where id = :id";
+         Query query = ses.createQuery(hql);
+         query.setLong("id", id);
+         User user = null;
+         if(query.list().size() != 0) {
+        	 user = (User) query.list().get(0);
+         }
+    	 return user;
+     }
  }
