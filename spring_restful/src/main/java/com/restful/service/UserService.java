@@ -15,20 +15,15 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service("userService")
 public class UserService {
 	
-    
     @Autowired
     private UserDAO userDAO;
     
-    private static final AtomicLong counter = new AtomicLong();
-    
-    private static List<User> users;
-	
 	public List<User> findAllUsers() {
-		users = userDAO.getAllUsers();
-		return users;
+		return userDAO.getAllUsers();
 	}
 	
 	public User findById(long id) {
+		List<User> users = userDAO.getAllUsers();
 		for(User user : users){
 			if(user.getId() == id){
 				return user;
@@ -38,6 +33,7 @@ public class UserService {
 	}
 	
 	public User findByName(String name) {
+		List<User> users = userDAO.getAllUsers();
 		for(User user : users){
 			if(user.getUsername().equalsIgnoreCase(name)){
 				return user;
@@ -47,23 +43,16 @@ public class UserService {
 	}
 	
 	public void saveUser(User user) {
-		user.setId(counter.incrementAndGet());
-		users.add(user);
+		userDAO.savelUser(user);
 	}
 
 	public void updateUser(User user) {
-		int index = users.indexOf(user);
-		users.set(index, user);
+		userDAO.updateUser(user);
 	}
 
 	public void deleteUserById(long id) {
-		
-		for (Iterator<User> iterator = users.iterator(); iterator.hasNext(); ) {
-		    User user = iterator.next();
-		    if (user.getId() == id) {
-		        iterator.remove();
-		    }
-		}
+		User user = this.findById(id);
+		userDAO.deleteUser(user);
 	}
 
 	public boolean isUserExist(User user) {
@@ -71,7 +60,10 @@ public class UserService {
 	}
 	
 	public void deleteAllUsers(){
-		users.clear();
+		List<User> users = this.findAllUsers();
+		for(User user : users) {
+			userDAO.deleteUser(user);
+		}
 	}
 	
 }

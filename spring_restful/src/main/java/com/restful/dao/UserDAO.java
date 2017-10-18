@@ -12,11 +12,6 @@ import com.restful.entity.User;
 
 import java.util.List;
 
- /**
-  * @author Lexel PRO
-  * @version 1.0
-  */
-
  @Repository
  public class UserDAO{
 
@@ -25,14 +20,14 @@ import java.util.List;
 
      @Transactional
      public List<User> getAllUsers() {
-         Session ses = sessionFactory.openSession();
+         Session ses = sessionFactory.getCurrentSession();
          Query query = ses.createQuery(" from "+User.class.getName()+"");
          return query.list();
      }
 	
      @Transactional
      public User getUser(long id) {
-    	 Session ses = sessionFactory.openSession();
+    	 Session ses = sessionFactory.getCurrentSession();
     	 String hql = " from " +User.class.getName()+ " where id = :id";
          Query query = ses.createQuery(hql);
          query.setLong("id", id);
@@ -41,5 +36,26 @@ import java.util.List;
         	 user = (User) query.list().get(0);
          }
     	 return user;
+     }
+     
+     @Transactional
+     public void savelUser(User user) {
+         Session ses = sessionFactory.getCurrentSession();
+         ses.save(user);
+     }
+     
+     @Transactional
+     public void updateUser(User user) {
+         Session ses = sessionFactory.getCurrentSession();
+         ses.update(user);
+     }
+     
+     @Transactional
+     public void deleteUser(User user) {
+    	 System.out.println(user.getAddress());
+    	 System.out.println(user.getEmail());
+    	 System.out.println(user.getId());
+         Session ses = sessionFactory.getCurrentSession();
+         ses.delete(user);
      }
  }
