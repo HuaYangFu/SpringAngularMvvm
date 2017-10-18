@@ -14,44 +14,84 @@ public class User implements Serializable {
 	
 	private static final long serialVersionUID = -7988799579036225137L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column
-    private String name;
+	private String username;
     @Column
-    private int age;
+	private String address;
+    @Column
+	private String email;
+	
+	public User(){
+		id=0;
+	}
+	
+	public User(long id, String username, String address, String email){
+		this.id = id;
+		this.username = username;
+		this.address = address;
+		this.email = email;
+	}
 
-    public User () {
-    }
-    
-    public User (long id, int age, String name) {
-    	this.id = id;
-		this.age = age;
-		this.name = name;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof User))
+			return false;
+		User other = (User) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", address=" + address
+				+ ", email=" + email + "]";
+	}
 }

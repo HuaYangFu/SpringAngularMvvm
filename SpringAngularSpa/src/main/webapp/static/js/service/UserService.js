@@ -2,7 +2,7 @@
 
 angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $q){
 
-    var REST_SERVICE_URI = 'http://localhost:8082/SpringAngularSpaApi/user/';
+    var REST_SERVICE_URI = 'http://localhost:8080/spring_restful/user/';
 
     var factory = {
         fetchAllUsers: fetchAllUsers,
