@@ -18,3 +18,7 @@ test_url-1:
 	
 test_url-2:
 	http://localhost:8080/SpringAngularSpa/
+	
+## refence
+	http://websystique.com/springmvc/spring-mvc-4-angularjs-example/
+	https://scotch.io/tutorials/single-page-apps-with-angularjs-routing-and-templating
