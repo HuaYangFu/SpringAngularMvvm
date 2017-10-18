@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Service
+@Service("userService")
 public class UserService {
 	
     
@@ -24,10 +24,7 @@ public class UserService {
     private static List<User> users;
 	
 	static{
-		users = new ArrayList<User>();
-		users.add(new User(counter.incrementAndGet(),"Sam", "NY", "sam@abc.com"));
-		users.add(new User(counter.incrementAndGet(),"Tomy", "ALBAMA", "tomy@abc.com"));
-		users.add(new User(counter.incrementAndGet(),"Kelly", "NEBRASKA", "kelly@abc.com"));
+		users= populateDummyUsers();
 	}
 
 	public List<User> findAllUsers() {
@@ -78,5 +75,13 @@ public class UserService {
 	
 	public void deleteAllUsers(){
 		users.clear();
+	}
+	
+	private static List<User> populateDummyUsers(){
+		List<User> users = new ArrayList<User>();
+		users.add(new User(counter.incrementAndGet(),"Sam", "NY", "sam@abc.com"));
+		users.add(new User(counter.incrementAndGet(),"Tomy", "ALBAMA", "tomy@abc.com"));
+		users.add(new User(counter.incrementAndGet(),"Kelly", "NEBRASKA", "kelly@abc.com"));
+		return users;
 	}
 }
