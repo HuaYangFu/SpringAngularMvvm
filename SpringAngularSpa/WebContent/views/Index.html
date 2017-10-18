@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <script src="static/js/plugin/angular1.2.25.js"></script>
+  <script src="static/js/plugin/angular-route1.2.25.js"></script>
+  <script src="static/js/app.js"></script>
+  
+  <link href="static/css/bootstrap3.3.5.css" rel="stylesheet"></link>
+  <link href="static/css/app.css" rel="stylesheet"></link>
+</head>
+<body>
+
+  <script src="static/js/service/UserService.js"></script>
+  <script src="static/js/controller/UserController.js"></script>
+  <script src="static/js/controller/HomeController.js"></script>
+  
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Home</a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#user"><i class="fa fa-shield"></i>user</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="main">
+    <div ng-view></div>
+  </div>
+</body>
+</html>
