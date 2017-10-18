@@ -17,18 +17,15 @@ public class UserService {
 	
     
     @Autowired
-    private static UserDAO userDAO;
+    private UserDAO userDAO;
     
     private static final AtomicLong counter = new AtomicLong();
     
     private static List<User> users;
 	
-	static{
-		users= populateDummyUsers();
-	}
-
 	public List<User> findAllUsers() {
-		return users; 
+		users = userDAO.getAllUsers();
+		return users;
 	}
 	
 	public User findById(long id) {
@@ -77,11 +74,4 @@ public class UserService {
 		users.clear();
 	}
 	
-	private static List<User> populateDummyUsers(){
-		List<User> users = new ArrayList<User>();
-		users.add(new User(counter.incrementAndGet(),"Sam", "NY", "sam@abc.com"));
-		users.add(new User(counter.incrementAndGet(),"Tomy", "ALBAMA", "tomy@abc.com"));
-		users.add(new User(counter.incrementAndGet(),"Kelly", "NEBRASKA", "kelly@abc.com"));
-		return users;
-	}
 }
